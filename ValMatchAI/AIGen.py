@@ -13,4 +13,3 @@ def imageToText(img):
 
     text = pytesseract.image_to_string(img)
 
-    print(text, 'hi')
