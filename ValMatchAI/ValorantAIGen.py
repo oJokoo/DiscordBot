@@ -1,11 +1,10 @@
 import io
 
 import discord
-import responses
+from Responses import responses
 import requests
 import shutil
 import os
-from io import BytesIO
 import pytesseract as tess
 tess.pytesseract.tesseract_cmd = r'C:\Users\jiths\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
 from PIL import Image
@@ -21,7 +20,7 @@ async def send_message(message, user_message, is_private):
 
 
 def run_discord_bot():
-    TOKEN = 'MTA2NzIwODkxMjY3NzM4NDMxMg.GzdUeZ.bw3mFs9JhexPmVks5IgmG-p0DL7Ga6gU16rVyM'
+    TOKEN = 'MTA2NzIwODkxMjY3NzM4NDMxMg.GvLssB.UFm0koZXkqQ6tBmE7_jGB5kClDeAK20qqNtzn0'
     intents = discord.Intents.default()
     intents.message_content = True
     client = discord.Client(intents=intents)
