@@ -11,6 +11,6 @@ def get_response(message: str) -> str:
         return str(random.randint(1, 6))
 
     if p_message == '!help':
-        return 'Youre so dumb kekW'
+        return 'You\'re so dumb kekW'
 
     return 'I didn\'t understand what you wrote. Try typing "!help".'

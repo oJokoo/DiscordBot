@@ -1,3 +1,5 @@
+import io
+
 import discord
 import responses
 import requests
@@ -19,7 +21,7 @@ async def send_message(message, user_message, is_private):
 
 
 def run_discord_bot():
-    TOKEN = 'MTA2NzIwODkxMjY3NzM4NDMxMg.GyuBAI.C0bFTGH_smoMozOK63RX_QSEKfO5yMGo8cAULs'
+    TOKEN = 'MTA2NzIwODkxMjY3NzM4NDMxMg.GzdUeZ.bw3mFs9JhexPmVks5IgmG-p0DL7Ga6gU16rVyM'
     intents = discord.Intents.default()
     intents.message_content = True
     client = discord.Client(intents=intents)
@@ -49,8 +51,8 @@ def run_discord_bot():
             else:
                 print('Image Couldn\'t be retrieved')
 
-            print(fileName)
-            img = Image.open(fileName)
+            response = requests.get(imageURL)
+            img = Image.open(io.BytesIO(response.content))
             text = tess.image_to_string(img)
             print(text)
 
