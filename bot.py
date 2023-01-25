@@ -3,6 +3,10 @@ import responses
 import requests
 import shutil
 import os
+from io import BytesIO
+import pytesseract as tess
+tess.pytesseract.tesseract_cmd = r'C:\Users\jiths\AppData\Local\Programs\Tesseract-OCR\tesseract.exe'
+from PIL import Image
 
 
 async def send_message(message, user_message, is_private):
@@ -15,7 +19,7 @@ async def send_message(message, user_message, is_private):
 
 
 def run_discord_bot():
-    TOKEN = 'MTA2NzIwODkxMjY3NzM4NDMxMg.GDDGCb.24_l2nGU2K7_TgKtM21LkPKsridEQiAFRmuF3o'
+    TOKEN = 'MTA2NzIwODkxMjY3NzM4NDMxMg.GyuBAI.C0bFTGH_smoMozOK63RX_QSEKfO5yMGo8cAULs'
     intents = discord.Intents.default()
     intents.message_content = True
     client = discord.Client(intents=intents)
@@ -45,9 +49,12 @@ def run_discord_bot():
             else:
                 print('Image Couldn\'t be retrieved')
 
-            os.remove(fileName)  #Remove file photo after its been processed with AI
+            print(fileName)
+            img = Image.open(fileName)
+            text = tess.image_to_string(img)
+            print(text)
 
-
+            os.remove(fileName)  # Remove file photo after it has been processed with AI
 
         username = str(message.author)
         user_message = str(message.content)
@@ -55,12 +62,12 @@ def run_discord_bot():
 
         print(f'{username} said: "{user_message}" ({channel})')
 
-        if user_message[0] == '?':
-            user_message = user_message[1:]
-            await send_message(message, user_message, is_private=True)
-        elif user_message[0] == '!':
-            await send_message(message, user_message, is_private=False)
-        else:
-            return
+        # if user_message[0] == '?':
+        #     user_message = user_message[1:]
+        #     await send_message(message, user_message, is_private=True)
+        # elif user_message[0] == '!':
+        #     await send_message(message, user_message, is_private=False)
+        # else:
+        #     return
 
     client.run(TOKEN)
